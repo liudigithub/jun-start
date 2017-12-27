@@ -24,6 +24,24 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
+    <!-- 跨域 -->
+    <filter>
+      <filter-name>corsFilter</filter-name>
+      <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+      <init-param>
+        <param-name>allowOrigin</param-name>
+        <param-value>*</param-value>
+      </init-param>
+      <init-param>
+        <param-name>allowMethods</param-name>
+        <param-value>GET,POST</param-value>
+      </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>corsFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
 	<!-- 布局过滤器 -->
 	<!-- <filter> -->
 	<!-- <filter-name>sitemesh</filter-name> -->
