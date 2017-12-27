@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+	<classPathEntry location="D:\mysql-connector-5.1.8.jar" />
+	<context id="context1">
+		<property name="javaFileEncoding" value="UTF-8" />
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
+		<!-- 去掉注释（true将影响代码再生成及合并） -->
+		<commentGenerator>
+			<property name="suppressAllComments" value="false" />
+			<property name="suppressDate" value="false" />
+		</commentGenerator>
+
+		<!-- 数据库连接 -->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://118.184.32.71:3306/test" userId="root"
+			password="zero1234" />
+
+		<!-- 类型解析 -->
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<!-- 模型生成 -->
+		<javaModelGenerator targetPackage="com.liu.model"
+			targetProject="test-project">
+			<property name="constructorBased" value="false" />
+			<property name="enableSubPackages" value="false" />
+		</javaModelGenerator>
+
+		<!-- 映射生成 -->
+		<sqlMapGenerator targetPackage="com.liu.mapper"
+			targetProject="test-project">
+			<property name="enableSubPackages" value="false" />
+		</sqlMapGenerator>
+
+		<!-- 数据访问层生成 -->
+		<javaClientGenerator targetPackage="com.liu.dao"
+			targetProject="test-project" type="XMLMAPPER">
+			<property name="enableSubPackages" value="false" />
+			<property name="methodNameCalculator" value="extended" />
+		</javaClientGenerator>
+
+		<table schema="test" tableName="user_t" domainObjectName="User">
+			<property name="useActualColumnNames" value="false" />
+			<generatedKey column="id" sqlStatement="JDBC" identity="true" />
+		</table>
+	</context>
+</generatorConfiguration>
