@@ -2,8 +2,10 @@ package com.liu.test;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.SocketException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -20,58 +22,108 @@ import org.junit.Test;
  * @date 2017年12月28日
  */
 public class UploadFileTest {
-    private static Logger logger = Logger.getLogger(UploadFileTest.class);  
+    private static Logger logger = Logger.getLogger(UploadFileTest.class);
+
+    /**
+     * 文件上传
+     * 
+     * @author liudi
+     * @date 2017年12月28日
+     */
     @Test
-    public void testFtp1(){
-        //创建客户端对象
+    public void testFtp1() {
+        // 创建客户端对象
         FTPClient ftp = new FTPClient();
-        InputStream local=null;
+        InputStream local = null;
         try {
-            //连接ftp服务器
+            // 连接ftp服务器
             ftp.connect("118.184.32.71", 21);
-            //登录
+            // 登录
             ftp.login("administrator", "ZAQXSW159357");
-            //设置上传路径
-            String basePath="/image/photo/";
+            // 设置上传路径
+            String basePath = "/image/photo/";
             boolean flagBase = ftp.changeWorkingDirectory(basePath);
-            if(!flagBase){
-                //创建上传的路径  该方法只能创建一级目录，在这里如果/home/ftpuser存在则可创建image
+            if (!flagBase) {
+                // 创建上传的路径 该方法只能创建一级目录，在这里如果/home/ftpuser存在则可创建image
                 ftp.makeDirectory(basePath);
             }
             Date currentDate = new Date();
-            String dateStr=new SimpleDateFormat("yyyy/MM/dd").format(currentDate);
-            for(String pathStr:dateStr.split("/")){
-                basePath+=pathStr+"/";
+            String dateStr = new SimpleDateFormat("yyyy/MM/dd").format(currentDate);
+            for (String pathStr : dateStr.split("/")) {
+                basePath += pathStr + "/";
                 boolean flag = ftp.changeWorkingDirectory(basePath);
-                if(!flag){
-                    //创建上传的路径  该方法只能创建一级目录，在这里如果/home/ftpuser存在则可创建image
+                if (!flag) {
+                    // 创建上传的路径 该方法只能创建一级目录，在这里如果/home/ftpuser存在则可创建image
                     ftp.makeDirectory(basePath);
                 }
             }
-            //检查上传路径是否存在 如果不存在返回false
+            // 检查上传路径是否存在 如果不存在返回false
             ftp.changeWorkingDirectory(basePath);
-            //指定上传文件的类型  二进制文件
+            // 指定上传文件的类型 二进制文件
             ftp.setFileType(FTP.BINARY_FILE_TYPE);
-            //读取本地文件
+            // 读取本地文件
             File file = new File("D:\\new.png");
             local = new FileInputStream(file);
-            //第一个参数是文件名
-            ftp.storeFile(file.getName(), local);
-         } catch (SocketException e) {
-             e.printStackTrace();
-         } catch (IOException e) {
-             e.printStackTrace();
-         }finally {
-             try {
-                 //关闭文件流
-                 local.close();
-                 //退出
-                 ftp.logout();
-                 //断开连接
-                 ftp.disconnect();
-             } catch (IOException e) {
-                 e.printStackTrace();
-             }
-         }
+            // 获取文件后缀
+            String suffix = file.getName().substring(file.getName().lastIndexOf("."));
+            // 文件名称
+            String fileName = currentDate.getTime() + suffix;
+            // 第一个参数是文件名
+            ftp.storeFile(fileName, local);
+        } catch (SocketException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                // 关闭文件流
+                local.close();
+                // 退出
+                ftp.logout();
+                // 断开连接
+                ftp.disconnect();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * 文件下载
+     * 
+     * @author liudi
+     * @date 2017年12月28日
+     */
+    @Test
+    public void testFtp2() {
+        FTPClient ftp = new FTPClient();
+        try {
+            // 连接ftp服务器
+            ftp.connect("118.184.32.71", 21);
+            // 登录
+            ftp.login("administrator", "ZAQXSW159357");
+            // 文件路径
+            String basePath = "/image/photo/2017/12/28/";
+            ftp.changeWorkingDirectory(basePath);// 转移到FTP服务器目录
+            // 获取所有文件
+            // FTPFile[] fs = ftp.listFiles();
+            // 文件保存路径
+            String localPath = "D:\\new01.png";
+            File localFile = new File(localPath);
+            OutputStream is = new FileOutputStream(localFile);
+            // 下载文件
+            ftp.retrieveFile("new.png", is);
+            is.close();
+            ftp.logout();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (ftp.isConnected()) {
+                try {
+                    ftp.disconnect();
+                } catch (IOException ioe) {
+                }
+            }
+        }
     }
 }
