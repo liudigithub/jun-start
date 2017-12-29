@@ -1,65 +1,99 @@
-<?xml version="1.0" encoding="UTF-8"?>  
-<beans xmlns="http://www.springframework.org/schema/beans"  
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"  
-    xmlns:context="http://www.springframework.org/schema/context"  
-    xmlns:mvc="http://www.springframework.org/schema/mvc"  
-    xsi:schemaLocation="http://www.springframework.org/schema/beans    
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans    
                         http://www.springframework.org/schema/beans/spring-beans-3.1.xsd    
                         http://www.springframework.org/schema/context    
                         http://www.springframework.org/schema/context/spring-context-3.1.xsd    
                         http://www.springframework.org/schema/mvc    
-                        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">  
-    <!-- 自动扫描 -->  
-    <context:component-scan base-package="com.liu" />  
-    <!-- 引入配置文件 -->  
-    <bean id="propertyConfigurer"  
-        class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">  
-        <property name="locations">
-         <list>
-                <!-- 加载系统配置文件 -->
-                <!-- <value>/WEB-INF/boot/config/**/*.properties</value> -->
-                <!-- <value>file://${blt.conf.base}/*.properties</value> -->
-                <!-- <value>file:${blt.conf.base}/activemq.properties</value> -->
-                <value>file:${liu.conf.base}/jdbc.properties</value>
-          </list>
-        </property>
-    </bean>  
-  
-    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"  
-        destroy-method="close">  
-        <property name="driverClassName" value="${driver}" />  
-        <property name="url" value="${url}" />  
-        <property name="username" value="${username}" />  
-        <property name="password" value="${password}" />  
-        <!-- 初始化连接大小 -->  
-        <property name="initialSize" value="${initialSize}"></property>  
-        <!-- 连接池最大数量 -->  
-        <property name="maxActive" value="${maxActive}"></property>  
-        <!-- 连接池最大空闲 -->  
-        <property name="maxIdle" value="${maxIdle}"></property>  
-        <!-- 连接池最小空闲 -->  
-        <property name="minIdle" value="${minIdle}"></property>  
-        <!-- 获取连接最大等待时间 -->  
-        <property name="maxWait" value="${maxWait}"></property>  
-    </bean>  
-  
-    <!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件 -->  
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">  
-        <property name="dataSource" ref="dataSource" />  
-        <!-- 自动扫描mapping.xml文件 -->  
-        <property name="mapperLocations" value="classpath:com/liu/mapper/*.xml"></property>  
-    </bean>  
-  
-    <!-- DAO接口所在包名，Spring会自动查找其下的类 -->  
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">  
-        <property name="basePackage" value="com.liu.dao" />  
-        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>  
-    </bean>  
-  
-    <!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->  
-    <bean id="transactionManager"  
-        class="org.springframework.jdbc.datasource.DataSourceTransactionManager">  
-        <property name="dataSource" ref="dataSource" />  
-    </bean>  
-  
+                        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+	<!-- 自动扫描 -->
+	<context:component-scan base-package="com.liu" />
+	<!-- 引入配置文件 -->
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<!-- 加载系统配置文件 -->
+				<!-- <value>/WEB-INF/boot/config/**/*.properties</value> -->
+				<!-- <value>file://${blt.conf.base}/*.properties</value> -->
+				<!-- <value>file:${blt.conf.base}/activemq.properties</value> -->
+				<value>file:${liu.conf.base}/jdbc.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${driver}" />
+		<property name="url" value="${url}" />
+		<property name="username" value="${username}" />
+		<property name="password" value="${password}" />
+		<!-- 初始化连接大小 -->
+		<property name="initialSize" value="${initialSize}"></property>
+		<!-- 连接池最大数量 -->
+		<property name="maxActive" value="${maxActive}"></property>
+		<!-- 连接池最大空闲 -->
+		<property name="maxIdle" value="${maxIdle}"></property>
+		<!-- 连接池最小空闲 -->
+		<property name="minIdle" value="${minIdle}"></property>
+		<!-- 获取连接最大等待时间 -->
+		<property name="maxWait" value="${maxWait}"></property>
+	</bean>
+
+	<!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<!-- 自动扫描mapping.xml文件 -->
+		<property name="mapperLocations" value="classpath:com/liu/mapper/*.xml"></property>
+	</bean>
+
+	<!-- DAO接口所在包名，Spring会自动查找其下的类 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.liu.dao" />
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+	</bean>
+
+	<!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- 事务拦截bean -->
+	<bean
+		class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		<property name="beanNames">
+			<list>
+				<!-- 需要管理事务的bean,可以定义若干个 -->
+				<value>*Facade</value>
+				<value>*FacadeImpl</value>
+				<value>*Service</value>
+				<value>*ServiceImpl</value>
+
+			</list>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<!-- 事务通知，可以定义多个通知 -->
+				<value>transactionInterceptor</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 定义拦截器，用来指定事物属性，级别，和异常处理 -->
+	<bean id="transactionInterceptor"
+		class="org.springframework.transaction.interceptor.TransactionInterceptor">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*NoRollBack">PROPAGATION_REQUIRES_NEW</prop>
+				<prop key="*">PROPAGATION_REQUIRED,-Exception</prop>
+			</props>
+		</property>
+	</bean>
 </beans>  
