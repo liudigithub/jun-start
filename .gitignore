@@ -27,5 +27,6 @@ Servers
 target/**/*
 /target/
 *.class*
-*.pro*
+*.project
 *.set*
+logs
