@@ -18,4 +18,10 @@ public class UrlApi {
     public static final String URL_000003 = "/user/addUesr";
     /** 新增用户(TO) */
     public static final String URL_000004 = "/user/toAddUser";
+    
+    /*************************************************************
+     * 测试接口
+     ************************************************************/
+    /** 文件上传(TO) */
+    public static final String URL_010001 = "/test/toFileinput";
 }
