@@ -16,5 +16,5 @@
         <link rel="stylesheet" type="text/css" href="${serverRoot }static/base/fileinput/css/default.css">
         <link href="${serverRoot }static/base/fileinput/css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
         <script src="${serverRoot }static/base/fileinput/js/fileinput.js" type="text/javascript"></script>
-        <!--简体中文-->
+<!--         简体中文 -->
         <script src="${serverRoot }static/base/fileinput/js/locales/zh.js" type="text/javascript"></script>

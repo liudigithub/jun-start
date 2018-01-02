@@ -77,4 +77,17 @@ public class UserController {
         WebModelAndView modelView = new WebModelAndView("user/addUser");
         return modelView;
     }
+    
+    /**
+     * 登录（TO） 
+     * 
+     * @author liudi
+     * @date 2017年12月26日
+     * @return ModelAndView
+     */
+    @RequestMapping(value = {UrlApi.URL_000005}, method = {RequestMethod.GET})
+    public ModelAndView toLogin() {
+        WebModelAndView modelView = new WebModelAndView("login/login");
+        return modelView;
+    }
 }

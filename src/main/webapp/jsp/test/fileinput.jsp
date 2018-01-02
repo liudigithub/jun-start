@@ -21,6 +21,12 @@
                     <h2>Bootstrap File Input Example</h2>
                     </div>
                     <form enctype="multipart/form-data">
+                        <img src="${serverRoot }static/public/image/uploadImage.jpg" alt="选择图片" class="img-rounded">
+						<img src="${serverRoot }static/public/image/uploadImage.jpg" alt="选择图片" class="img-circle">
+						<img src="${serverRoot }static/public/image/uploadImage.jpg" alt="选择图片" class="img-thumbnail">
+                    </form>
+                    <hr>
+                    <form enctype="multipart/form-data">
                         <input id="file-0a" class="file" type="file" multiple data-min-file-count="1">
                         <br>
                         <button type="submit" class="btn btn-primary">Submit</button>
