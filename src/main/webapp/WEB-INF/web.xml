@@ -79,7 +79,7 @@
 	</servlet-mapping>
 
 	<welcome-file-list>
-		<welcome-file>/jsp/login/login.jsp</welcome-file>
+		<welcome-file>/root</welcome-file>
 	</welcome-file-list>
 
 </web-app>  
