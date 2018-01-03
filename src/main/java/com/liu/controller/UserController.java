@@ -38,7 +38,7 @@ public class UserController {
     @RequestMapping(value = {UrlApi.URL_000002}, method = {RequestMethod.GET})
     public ModelAndView showUser(@ModelAttribute Req000002 req) {
         int userId = req.getId();
-        WebModelAndView modelView = new WebModelAndView("showUser");
+        WebModelAndView modelView = new WebModelAndView("user/showUser");
         User user = userService.getUserById(userId);
         modelView.addObject("user", user);
         return modelView;
