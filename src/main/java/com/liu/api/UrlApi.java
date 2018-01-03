@@ -20,6 +20,8 @@ public class UrlApi {
     public static final String URL_000004 = "/user/toAddUser";
     /** 登录（TO） */
     public static final String URL_000005 = "/toLogin";
+    /** 展示页 */
+    public static final String URL_000006 = "/overview";
     
     /*************************************************************
      * 测试接口

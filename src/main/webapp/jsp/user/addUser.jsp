@@ -24,7 +24,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li><a href="#">Home</a></li>
+            <li><a href="overview">Home</a></li>
             <li  class="active"><a href="user/toAddUser">登录/注册</a></li>
             <li><a href="#contact">Contact</a></li>
             <li class="dropdown">
@@ -159,7 +159,7 @@
             </div>
 
             <div class="form-group">
-            	<input type="button" class="form-control btn btn-danger" value="登&nbsp;&nbsp;录" onclick="javascript:location.href='user/toLogin'">
+            	<input type="button" class="form-control btn btn-danger" value="登&nbsp;&nbsp;录" onclick="javascript:location.href='toLogin'">
             </div>
         </form>
     </div>

@@ -1,7 +1,5 @@
 package com.liu.controller;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +38,21 @@ public class TestController {
     }
     
     /**
-     * 用户展示
+     * 展示页
+     * 
+     * @author liudi
+     * @date 2017年12月26日
+     * @param req 参数
+     * @return ModelAndView
+     */
+    @RequestMapping(value = {UrlApi.URL_000006}, method = {RequestMethod.GET})
+    public ModelAndView overview() {
+        WebModelAndView modelView = new WebModelAndView("index");
+        return modelView;
+    }
+    
+    /**
+     * 根
      * 
      * @author liudi
      * @date 2017年12月26日
