@@ -1,5 +1,7 @@
 package com.liu.service;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.liu.exception.PlatformException;
 import com.liu.model.User;
 
@@ -28,8 +30,9 @@ public interface IUserService {
 	 * @param username 用户名
 	 * @param password 密码
 	 * @param age 年龄
+	 * @param headImage 头像
      * @return int
 	 * @throws PlatformException 异常
 	 */
-    public int addUser(String username, String password, int age) throws PlatformException;
+    public int addUser(String username, String password, int age,MultipartFile headImage) throws PlatformException;
 }

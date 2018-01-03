@@ -45,7 +45,7 @@
     </nav>
 <div class="container theme-showcase top-100" role="main">
     <div class="col-md-6 col-md-offset-3">
-        <form action="user/addUesr" method="post"  class="">
+        <form action="user/addUesr" method="post"  class="" enctype="multipart/form-data" >
 
 			<div class="form-group has-feedback reg">
 				<label >新用户注册</label>
@@ -90,6 +90,18 @@
                 <span style="color:red;display: none;" class="tips"></span>
                 <span style="display: none;" class="glyphicon glyphicon-remove form-control-feedback"></span>
                 <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
+            </div>
+
+            <div class="form-group has-feedback">
+                <label>头像</label>
+                <div class="blt-start-img">
+					<div id="preview" class="blt-img-preview blt-img-size-lg">
+						<img id="imgView1" border="0" src="${serverRoot }static/public/image/uploadImage.jpg" class="blt-border blt-img">
+					</div>
+					<div class="blt-a-version-upload blt-img-size-lg">本地上传图片
+						<input type="file" name="headImage" id="headImage" onchange="PreviewImage(this,'imgView1','divNewPreview')" class="btn blt-btn-choose-file blt-img-size-lg">
+					</div>
+				</div>
             </div>
 
 

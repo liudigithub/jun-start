@@ -65,3 +65,32 @@
     color: red;
     text-align: center;
 }
+
+.blt-start-img{
+/* 	float: left; */
+	position: relative;
+    margin-left: 40px;
+}
+.blt-img-preview{
+    position: relative;
+    width: 198px;
+    height: 148px;
+    margin-top: 12px;
+    overflow: hidden;
+}
+.blt-img-preview img {
+    width: 100%;
+    height: 100%;
+}
+.blt-border {
+    border: 1px solid #e6e6e6;
+}
+.blt-img-size-lg {
+    width: 198px;
+    height: 148px;
+}
+.blt-a-version-upload {
+    position: absolute;
+    top: 0;
+    opacity: 0;
+}

@@ -21,6 +21,7 @@
 				<!-- <value>file://${blt.conf.base}/*.properties</value> -->
 				<!-- <value>file:${blt.conf.base}/activemq.properties</value> -->
 				<value>file:${liu.conf.base}/jdbc.properties</value>
+				<value>file:${liu.conf.base}/ftp.properties</value>
 			</list>
 		</property>
 	</bean>
@@ -96,4 +97,7 @@
 			</props>
 		</property>
 	</bean>
+	
+	<!-- 自定义bean -->
+	<import resource="bean/bean.xml"/>
 </beans>  

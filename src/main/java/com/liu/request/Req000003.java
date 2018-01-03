@@ -1,5 +1,7 @@
 package com.liu.request;
 
+import org.springframework.web.multipart.MultipartFile;
+
 
 /**
  * 新增用户
@@ -15,6 +17,8 @@ public class Req000003 {
     private String password;
     /** 年龄 */
     private int age;
+    /** 头像*/
+    private MultipartFile headImage;
 
     public String getUsername() {
         return username;
@@ -38,6 +42,14 @@ public class Req000003 {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public MultipartFile getHeadImage() {
+        return headImage;
+    }
+
+    public void setHeadImage(MultipartFile headImage) {
+        this.headImage = headImage;
     }
 
 }
