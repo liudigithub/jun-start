@@ -57,7 +57,7 @@ public class UserController {
 
         WebModelAndView modelView = new WebModelAndView("user/addUser");
         try {
-            int id = userService.addUser(req.getUsername(), req.getPassword(), req.getAge(),req.getHeadImage());
+            int id = userService.addUser(req.getUsername(), req.getPassword(), req.getAge(),req.getHeadImage(),req.getContent());
             modelView.setViewName("redirect:".concat(UrlApi.URL_000002).concat("?id=").concat(id+""));
         } catch (PlatformException e) {
             GtmAppExceptionUtils.processException(modelView, e);

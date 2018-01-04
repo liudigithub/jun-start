@@ -31,8 +31,9 @@ public interface IUserService {
 	 * @param password 密码
 	 * @param age 年龄
 	 * @param headImage 头像
+	 * @param content 简介
      * @return int
 	 * @throws PlatformException 异常
 	 */
-    public int addUser(String username, String password, int age,MultipartFile headImage) throws PlatformException;
+    public int addUser(String username, String password, int age,MultipartFile headImage,String content) throws PlatformException;
 }

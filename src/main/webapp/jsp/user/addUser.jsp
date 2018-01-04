@@ -6,7 +6,6 @@
 <head>
 <link>
 <link rel="stylesheet" type="text/css" href="${serverRoot }static/page/user/addUser.css">
-<script type="text/javascript" lang="" src="${serverRoot }static/page/user/addUser.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>新增用户</title>
 </head>
@@ -73,6 +72,22 @@
 				</div>
             </div>
 
+            <div class="form-group has-feedback">
+                <label>简介</label>
+				<div class="adjoined-bottom">
+					<div class="grid-container">
+						<div class="grid-width-100">
+							<textarea id="editor" name="content">
+								<h1>Hello world!</h1>
+								<p>I'm an instance of <a href="https://ckeditor.com">CKEditor</a>.</p>
+							</textarea>
+						</div>
+					</div>
+				</div>
+            </div>
+
+
+
 
 
 
@@ -133,5 +148,7 @@
         </form>
     </div>
 </div>
+<script src="${serverRoot }static/base/ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="${serverRoot }static/page/user/addUser.js"></script>
 </body>
 </html>

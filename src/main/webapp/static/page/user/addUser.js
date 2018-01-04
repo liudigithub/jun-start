@@ -1,3 +1,20 @@
+$(function(){
+	// 设置高度
+	CKEDITOR.config.height = 150;
+	// 设置宽度
+	CKEDITOR.config.width = 'auto';
+	// 皮肤
+	CKEDITOR.config.skin = 'BootstrapCK-Skin';
+	// 获取对象
+	var editorElement = CKEDITOR.document.getById( 'editor' );
+	// 实例化对象
+	CKEDITOR.replace( 'editor' );
+	// 获取html
+//	var content = CKEDITOR.instances.editor.getData();   //CKEDITOR.instances.控件ID.getData();
+});
+
+
+// 图片处理
 function PreviewImage(obj, imgPreviewId, divPreviewId) {
                    
     var allowExtention = ".jpg,.bmp,.gif,.png"; //,允许上传文件的后缀名

@@ -6,6 +6,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>测试</title>
+<style type="text/css">
+.content{
+	color: blue;
+    font-size: 22px;
+    text-align: center;
+    width: 100%;
+}
+</style>
 </head>
 <body>
 		<jsp:include page="nav.jsp"></jsp:include>
@@ -19,13 +27,9 @@
 				 ${data.user.userName }</label>
 			</div>
 
-            <div class="form-group has-feedback">
-                <div class="blt-start-img">
-					<div id="preview" class="blt-img-preview blt-img-size-lg center">
-						
-						<img id="imgView1" border="0" src="" class="blt-border blt-img">
-					</div>
-				</div>
+            <div class="form-group has-feedback" style="border: double;">
+                <label class="content">简介</label>
+                <div>${data.user.content }</div>
             </div>
 
         </form>

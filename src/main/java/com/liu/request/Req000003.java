@@ -17,8 +17,10 @@ public class Req000003 {
     private String password;
     /** 年龄 */
     private int age;
-    /** 头像*/
+    /** 头像 */
     private MultipartFile headImage;
+    /** 简介 */
+    private String content;
 
     public String getUsername() {
         return username;
@@ -50,6 +52,14 @@ public class Req000003 {
 
     public void setHeadImage(MultipartFile headImage) {
         this.headImage = headImage;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
 }

@@ -45,9 +45,18 @@ public class FileUploadUtils {
     /** 路径 */
     protected String url;
 
-    
-    public String uploadImage(String name,InputStream image,boolean zip) {
-        String savePath=null;
+    /**
+     * 保存文件
+     * 
+     * @author liudi
+     * @date 2018年1月4日
+     * @param name 文件名
+     * @param inputStream 输入流
+     * @param zip 是否压缩图片
+     * @return 路径
+     */
+    public String save(String name, InputStream inputStream, boolean zip) {
+        String savePath = null;
         // 创建客户端对象
         FTPClient ftp = new FTPClient();
         InputStream local = null;
@@ -77,13 +86,13 @@ public class FileUploadUtils {
             ftp.changeWorkingDirectory(basePath);
             // 指定上传文件的类型 二进制文件
             ftp.setFileType(FTP.BINARY_FILE_TYPE);
-            
-            if(zip){
+
+            if (zip) {
                 // 文件压缩
-                byte[] by = zipPhoto(image);
+                byte[] by = zipPhoto(inputStream);
                 local = new ByteArrayInputStream(by);
-            }else{
-                local = image;
+            } else {
+                local = inputStream;
             }
             // 获取文件后缀
             String suffix = name.substring(name.lastIndexOf("."));
@@ -91,9 +100,9 @@ public class FileUploadUtils {
             String fileName = currentDate.getTime() + suffix;
             // 第一个参数是文件名
             ftp.storeFile(fileName, local);
-            
+
             // 取出 /image/
-            savePath = basePath.substring(7)+fileName;
+            savePath = basePath.substring(7) + fileName;
         } catch (SocketException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -122,10 +131,10 @@ public class FileUploadUtils {
      * @return
      * @throws IOException
      */
-    public byte[] zipPhoto(InputStream inputStream) throws IOException{
+    public byte[] zipPhoto(InputStream inputStream) throws IOException {
         // 读取图像原始数据
         byte[] orginData = StreamUtils.copyToByteArray(inputStream);
-        
+
         // 读取图片数据(MemoryCacheImageInputStream,内存解码)
         ImageInputStream imageInput = new MemoryCacheImageInputStream(new ByteArrayInputStream(orginData));
         Iterator<ImageReader> iterator = ImageIO.getImageReaders(imageInput);
@@ -152,7 +161,7 @@ public class FileUploadUtils {
             float rate = 1080f / Math.max(w, h);
             dstWidth = (int) (w * rate);
             dstHeight = (int) (h * rate);
-            
+
             // 压缩
             BufferedImage tag = new BufferedImage(dstWidth, dstHeight, image.getType());
             tag.getGraphics().drawImage(image, 0, 0, dstWidth, dstHeight, null);
@@ -169,8 +178,7 @@ public class FileUploadUtils {
             iwp.setProgressiveMode(ImageWriteParam.MODE_DISABLED);
             // 指定压缩时使用的色彩模式
             ColorModel colorModel = ColorModel.getRGBdefault();
-            iwp.setDestinationType(new ImageTypeSpecifier(colorModel,
-                    colorModel.createCompatibleSampleModel(32, 32)));
+            iwp.setDestinationType(new ImageTypeSpecifier(colorModel, colorModel.createCompatibleSampleModel(32, 32)));
 
             // 开始打包图片
             IIOImage iiamge = new IIOImage(tag, null, null);
@@ -194,6 +202,70 @@ public class FileUploadUtils {
             fileData = orginData;
         }
         return fileData;
+    }
+
+    /**
+     * 下载文件
+     * 
+     * @author liudi
+     * @date 2018年1月4日
+     * @param oldUrl 地址
+     * @return 输入流
+     */
+    public InputStream download(String oldUrl) {
+        FTPClient ftp = new FTPClient();
+        try {
+            // 连接ftp服务器
+            ftp.connect(host, port);
+            // 登录
+            ftp.login(username, password);
+            // 文件路径
+            String basePath = "/image/" + oldUrl;
+            // 下载文件
+            InputStream inputStream = ftp.retrieveFileStream(basePath);
+            ftp.logout();
+            return inputStream;
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (ftp.isConnected()) {
+                try {
+                    ftp.disconnect();
+                } catch (IOException ioe) {
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 删除文件
+     * 
+     * @author liudi
+     * @date 2018年1月4日
+     * @param oldUrl 文件地址
+     */
+    public void deleteFile(String oldUrl) {
+        FTPClient ftp = new FTPClient();
+        try {
+            // 连接ftp服务器
+            ftp.connect(host, port);
+            // 登录
+            ftp.login(username, password);
+            // 文件路径
+            String basePath = "/image/" + oldUrl;
+            // 删除
+            ftp.deleteFile(basePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (ftp.isConnected()) {
+                try {
+                    ftp.disconnect();
+                } catch (IOException ioe) {
+                }
+            }
+        }
     }
 
     public String getHost() {
@@ -235,6 +307,5 @@ public class FileUploadUtils {
     public void setUrl(String url) {
         this.url = url;
     }
-
 
 }

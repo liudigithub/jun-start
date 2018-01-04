@@ -13,7 +13,7 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
  * JSON类型的视图和模型对象。
  * </p>
  * 
- * @author lvyang
+ * @author liudi
  * 
  * @since 1.0
  */
