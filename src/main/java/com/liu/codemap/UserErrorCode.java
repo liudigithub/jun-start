@@ -12,6 +12,7 @@ package com.liu.codemap;
 public enum UserErrorCode implements CodeMap {
     USER0001("USER0001", "账号已存在"),
     USER0002("USER0002", "请上传头像"),
+    USER0003("USER0003", "用户名或密码不正确"),
     ;
 
 

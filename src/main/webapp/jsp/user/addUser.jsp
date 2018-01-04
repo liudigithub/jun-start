@@ -13,7 +13,7 @@
 	<jsp:include page="nav.jsp"></jsp:include>
 <div class="container theme-showcase top-100" role="main">
     <div class="col-md-6 col-md-offset-3">
-        <form action="user/addUesr" method="post"  class="" enctype="multipart/form-data" >
+        <form action="user/addUesr" id="addUser" method="post"  class="" enctype="multipart/form-data" >
 
 			<div class="form-group has-feedback reg">
 				<label >新用户注册</label>

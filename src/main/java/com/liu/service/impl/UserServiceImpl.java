@@ -1,6 +1,7 @@
 package com.liu.service.impl;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.crypto.hash.Md5Hash;
@@ -37,7 +38,8 @@ public class UserServiceImpl implements IUserService {
     @Override
     public User getUserById(int userId) {
         User user = userDao.selectByPrimaryKey(userId);
-        if(StringUtils.isNotEmpty(user.getContent())){
+        user.setPassword(null);
+        if (StringUtils.isNotEmpty(user.getContent())) {
             try {
                 String content = richTextUtils.readHtml(user.getContent());
                 user.setContent(content);
@@ -49,7 +51,7 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public int addUser(String username, String password, int age, MultipartFile headImage, String content)
+    public User addUser(String username, String password, int age, MultipartFile headImage, String content)
             throws PlatformException {
         UserExample example = new UserExample();
         example.createCriteria().andUserNameEqualTo(username);
@@ -73,11 +75,29 @@ public class UserServiceImpl implements IUserService {
         } else {
             throw new PlatformException(UserErrorCode.USER0002.getCode(), UserErrorCode.USER0002.getName());
         }
-        if(StringUtils.isNotEmpty(content)){
+        if (StringUtils.isNotEmpty(content)) {
             String url = richTextUtils.saveHtml(null, content);
             user.setContent(url);
         }
         userDao.insertSelective(user);
-        return user.getId();
+        user.setPassword(null);
+        return user;
+    }
+
+    @Override
+    public User login(String username, String password) throws PlatformException {
+        UserExample example = new UserExample();
+        example.createCriteria().andUserNameEqualTo(username);
+        List<User> users = userDao.selectByExample(example);
+        if (users.size() == 0) {
+            throw new PlatformException(UserErrorCode.USER0003.getCode(), UserErrorCode.USER0003.getName());
+        }
+        User user = users.get(0);
+        String passwordMd5 = new Md5Hash(password).toString();
+        if (!user.getPassword().equals(passwordMd5)) {
+            throw new PlatformException(UserErrorCode.USER0003.getCode(), UserErrorCode.USER0003.getName());
+        }
+        user.setPassword(null);
+        return user;
     }
 }

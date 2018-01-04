@@ -7,7 +7,7 @@ function AjaxPost(Url,JsonData,LodingFun,ReturnFun) {
         dataType: 'json',
         async: 'false',
         beforeSend: LodingFun,
-        error: function () { AjaxErro({ "Status": "Erro", "Erro": "500" }); },
+        error: function (data) { AjaxErro({ "Status": data.message, "Erro": data.code }); },
         success: ReturnFun
     });
 }
@@ -32,20 +32,21 @@ function ErroAlert(e) {
 
 //Ajax 错误返回处理
 function AjaxErro(e) {
-    if (e.Status == "Erro") {
-        switch (e.Erro) {
-            case "500":
-                top.location.href = '/Erro/Erro500';
-                break;
-            case "100001":
-                ErroAlert("错误 : 错误代码 '10001'");
-                break;
-            default:
-                ErroAlert(e.Erro);
-        }
-    } else {
-        layer.msg("未知错误！");
-    }
+//    if (e.Status == "Erro") {
+//        switch (e.Erro) {
+//            case "500":
+//                top.location.href = '/Erro/Erro500';
+//                break;
+//            case "100001":
+//                ErroAlert("错误 : 错误代码 '10001'");
+//                break;
+//            default:
+//                ErroAlert(e.Erro);
+//        }
+//    } else {
+//        layer.msg("未知错误！");
+//    }
+	ErroAlert("错误 :"+e.Status+" 错误代码 '"+e.Erro+"'");
 }
 
 

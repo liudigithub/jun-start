@@ -1,5 +1,5 @@
 var canGetCookie = 0;// 是否支持存储Cookie 0 不支持 1 支持
-var ajaxmockjax = 1;// 是否启用虚拟Ajax的请求响 0 不启用 1 启用
+var ajaxmockjax = 0;// 是否启用虚拟Ajax的请求响 0 不启用 1 启用
 // 默认账号密码
 
 var truelogin = "zero";
@@ -92,81 +92,95 @@ layui.use('layer', function() {
 				} else if (code == '' || code.length != 4) {
 					ErroAlert('输入验证码');
 				} else {
-					// 认证中..
-					fullscreen();
-					$('.login').addClass('test'); // 倾斜特效
-					setTimeout(function() {
-						$('.login').addClass('testtwo'); // 平移特效
-					}, 300);
-					setTimeout(function() {
-						$('.authent').show().animate({
-							right : -320
-						}, {
-							easing : 'easeOutQuint',
-							duration : 600,
-							queue : false
-						});
-						$('.authent').animate({
-							opacity : 1
-						}, {
-							duration : 200,
-							queue : false
-						}).addClass('visible');
-					}, 500);
 
 					// 登陆
 					var JsonData = {
-						login : login,
-						pwd : pwd,
+						username : login,
+						password : pwd,
 						code : code
 					};
 					// 此处做为ajax内部判断
-					var url = "";
-					if (JsonData.login == truelogin
-							&& JsonData.pwd == truepwd
-							&& JsonData.code.toUpperCase() == CodeVal
-									.toUpperCase()) {
-						url = "Ajax/Login";
-					} else {
-						url = "Ajax/LoginFalse";
-					}
+					var url = "loginAjax";
+//					if (JsonData.login == truelogin
+//							&& JsonData.pwd == truepwd
+//							&& JsonData.code.toUpperCase() == CodeVal
+//									.toUpperCase()) {
+//						url = "Ajax/Login";
+//					} else {
+//						url = "Ajax/LoginFalse";
+//					}
 
-					AjaxPost(url, JsonData, function() {
-						// ajax加载中
-					}, function(data) {
-						// ajax返回
-						// 认证完成
-						setTimeout(function() {
-							$('.authent').show().animate({
-								right : 90
-							}, {
-								easing : 'easeOutQuint',
-								duration : 600,
-								queue : false
-							});
-							$('.authent').animate({
-								opacity : 0
-							}, {
-								duration : 200,
-								queue : false
-							}).addClass('visible');
-							$('.login').removeClass('testtwo'); // 平移特效
-						}, 2000);
-						setTimeout(function() {
-							$('.authent').hide();
-							$('.login').removeClass('test');
-							if (data.Status == 'ok') {
-								// 登录成功
-								$('.login div').fadeOut(100);
-								$('.success').fadeIn(1000);
-								$('.success').html(data.Text);
-								// 跳转操作
-
-							} else {
-								AjaxErro(data);
+					
+					  $.ajax({
+					        type: "post",
+					        url: url,
+					        data: JsonData,
+					        async: 'false',
+					        error: function (data) { 
+					        	alert(data)
+//					        	AjaxErro({ "Status": data.message, "Erro": data.code });
+					        	},
+					        success: function(data) {
+								// ajax返回
+					        	if(data.code!=0 && data.code!=200){
+									ErroAlert("错误 :"+data.message+" 错误代码 '"+data.code+"'");
+									return;
+								}
+					        	// 认证中..
+								fullscreen();
+								$('.login').addClass('test'); // 倾斜特效
+								setTimeout(function() {
+									$('.login').addClass('testtwo'); // 平移特效
+								}, 300);
+								setTimeout(function() {
+									$('.authent').show().animate({
+										right : -320
+									}, {
+										easing : 'easeOutQuint',
+										duration : 600,
+										queue : false
+									});
+									$('.authent').animate({
+										opacity : 1
+									}, {
+										duration : 200,
+										queue : false
+									}).addClass('visible');
+								}, 500);
+					        	// 认证完成
+								setTimeout(function() {
+									$('.authent').show().animate({
+										right : 90
+									}, {
+										easing : 'easeOutQuint',
+										duration : 600,
+										queue : false
+									});
+									$('.authent').animate({
+										opacity : 0
+									}, {
+										duration : 200,
+										queue : false
+									}).addClass('visible');
+									$('.login').removeClass('testtwo'); // 平移特效
+								}, 2000);
+								
+								$('.authent').hide();
+								$('.login').removeClass('test');
+								
+								
+								
+								
+								setTimeout(function() {
+									// 登录成功
+									$('.login div').fadeOut(100);
+									$('.success').fadeIn(1000);
+									$('.success').html("欢迎回来！<br></br>"+data.data.userName);
+									// 跳转操作
+									window.location.href="user/showUser";
+								}, 2400);
 							}
-						}, 2400);
-					})
+					    });
 				}
 			})
 })
