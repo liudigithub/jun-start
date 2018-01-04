@@ -11,8 +11,34 @@ $(function(){
 	CKEDITOR.replace( 'editor' );
 	// 获取html
 //	var content = CKEDITOR.instances.editor.getData();   //CKEDITOR.instances.控件ID.getData();
+	
+	$("#addUser").submit(function(){
+		if($("#username").val()==''){
+			errorInfo("输入用户名");
+			return false;
+		}
+		if($("#password").val()==''){
+			errorInfo("输入密码");
+			return false;
+		}
+		if($("#password").val()!=$("#passwordConfirm").val()){
+			errorInfo("两次密码不一样");
+			return false;
+		}
+		if($("#headImage").val()==''){
+			errorInfo("选择头像");
+			return false;
+		}
+		return true;
+	});
 });
 
+function errorInfo(message){
+	var index = layer.alert(message, { icon: 5, time: 2000, offset: 't', closeBtn: 0, title: '错误信息', btn: [], anim: 2, shade: 0 });
+    layer.style(index, {
+        color: '#777'
+    }); 
+}
 
 // 图片处理
 function PreviewImage(obj, imgPreviewId, divPreviewId) {
