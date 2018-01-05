@@ -27,8 +27,8 @@ public class RestConfiguration {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true); // you USUALLY want this
-        config.addAllowedOrigin("http://118.184.32.71");
-        config.addAllowedOrigin("http://118.184.32.71:*");
+        config.addAllowedOrigin("http://111.230.150.229");
+        config.addAllowedOrigin("http://111.230.150.229:*");
         config.addAllowedOrigin("http://localhost:*");
         config.addAllowedOrigin("http://127.0.0.1:*");
         config.addAllowedOrigin("http://localhost");
