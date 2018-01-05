@@ -150,4 +150,19 @@ public class UserController {
         }
         return modelView.getModelMap();
     }
+
+    /**
+     * 退出
+     * 
+     * @author liudi
+     * @date 2017年12月26日
+     * @return ModelAndView
+     */
+    @RequestMapping(value = {UrlApi.URL_000009}, method = {RequestMethod.GET,RequestMethod.POST})
+    public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) {
+        WebModelAndView modelView = new WebModelAndView("index");
+        HttpSession session = request.getSession();
+        session.setAttribute("currentUser", null);
+        return modelView;
+    }
 }

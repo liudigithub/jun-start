@@ -12,8 +12,7 @@
 <script type="text/javascript" src="${serverRoot }static/page/login/layui/layui.js"></script>
 
 <link rel="stylesheet" type="text/css" href="${serverRoot }static/base/bootstrap/3.3.5/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css"  href="${serverRoot }static/page/login/layui/css/layui.css"/>
-
+<%-- <link rel="stylesheet" type="text/css"  href="${serverRoot }static/page/login/layui/css/layui.css"/> --%>
 
         <link rel="stylesheet" type="text/css" href="${serverRoot }static/base/fileinput/css/default.css">
         <link href="${serverRoot }static/base/fileinput/css/fileinput.css" media="all" rel="stylesheet" type="text/css" />

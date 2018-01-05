@@ -45,7 +45,7 @@ public class TestController {
      * @param req 参数
      * @return ModelAndView
      */
-    @RequestMapping(value = {UrlApi.URL_000006}, method = {RequestMethod.GET})
+    @RequestMapping(value = {UrlApi.URL_000006,"/"}, method = {RequestMethod.GET})
     public ModelAndView overview() {
         WebModelAndView modelView = new WebModelAndView("index");
         return modelView;
@@ -59,7 +59,7 @@ public class TestController {
      * @param req 参数
      * @return ModelAndView
      */
-    @RequestMapping(value = {UrlApi.URL_000001,"/"}, method = {RequestMethod.GET})
+    @RequestMapping(value = {UrlApi.URL_000001}, method = {RequestMethod.GET})
     public ModelAndView root() {
         WebModelAndView modelView = new WebModelAndView("test/root");
         Map<String, String> map = testService.getRoot();

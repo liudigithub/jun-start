@@ -26,6 +26,8 @@ public class UrlApi {
     public static final String URL_000007 = "/login";
     /** 登录ajax */
     public static final String URL_000008 = "/loginAjax";
+    /** 退出 */
+    public static final String URL_000009 = "/logout";
     
     /*************************************************************
      * 测试接口
