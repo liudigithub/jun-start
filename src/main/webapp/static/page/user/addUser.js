@@ -40,6 +40,7 @@ function errorInfo(message){
 	        color: '#777'
 	    }); 
 	});
+	
 }
 
 // 图片处理
