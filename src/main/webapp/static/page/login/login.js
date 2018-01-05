@@ -117,8 +117,8 @@ layui.use('layer', function() {
 					        data: JsonData,
 					        async: 'false',
 					        error: function (data) { 
-					        	alert(data)
-//					        	AjaxErro({ "Status": data.message, "Erro": data.code });
+					        	ErroAlert("错误 :"+data.message+" 错误代码 '"+data.code+"'");
+					        	return;
 					        	},
 					        success: function(data) {
 								// ajax返回
