@@ -34,10 +34,12 @@ $(function(){
 });
 
 function errorInfo(message){
-	var index = layer.alert(message, { icon: 5, time: 2000, offset: 't', closeBtn: 0, title: '错误信息', btn: [], anim: 2, shade: 0 });
-    layer.style(index, {
-        color: '#777'
-    }); 
+	layui.use('layer', function () {
+		var index = layer.alert(message, { icon: 5, time: 2000, offset: 't', closeBtn: 0, title: '错误信息', btn: [], anim: 2, shade: 0 });
+	    layer.style(index, {
+	        color: '#777'
+	    }); 
+	});
 }
 
 // 图片处理
