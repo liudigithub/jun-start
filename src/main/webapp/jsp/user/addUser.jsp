@@ -148,7 +148,10 @@
         </form>
     </div>
 </div>
-<script src="${serverRoot }static/base/ckeditor/ckeditor.js"></script>
+<!-- 配置文件 -->
+<script type="text/javascript" src="${serverRoot }static/base/ueditor/ueditor.config.js"></script>
+<!-- 编辑器源码文件 -->
+<script type="text/javascript" src="${serverRoot }static/base/ueditor/ueditor.all.min.js"></script>
 <script type="text/javascript" src="${serverRoot }static/page/user/addUser.js"></script>
 </body>
 </html>

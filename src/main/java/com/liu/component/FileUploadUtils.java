@@ -102,7 +102,7 @@ public class FileUploadUtils {
             ftp.storeFile(fileName, local);
 
             // 取出 /image/
-            savePath = basePath.substring(7) + fileName;
+            savePath = basePath.substring(17) + fileName;
         } catch (SocketException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -220,7 +220,7 @@ public class FileUploadUtils {
             // 登录
             ftp.login(username, password);
             // 文件路径
-            String basePath = "/image/" + oldUrl;
+            String basePath = "/home/test/image/" + oldUrl;
             // 下载文件
             InputStream inputStream = ftp.retrieveFileStream(basePath);
             ftp.logout();
@@ -253,7 +253,7 @@ public class FileUploadUtils {
             // 登录
             ftp.login(username, password);
             // 文件路径
-            String basePath = "/image/" + oldUrl;
+            String basePath = "/home/test/image/" + oldUrl;
             // 删除
             ftp.deleteFile(basePath);
         } catch (IOException e) {

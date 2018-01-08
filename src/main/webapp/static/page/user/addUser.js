@@ -1,16 +1,20 @@
 $(function(){
-	// 设置高度
-	CKEDITOR.config.height = 150;
-	// 设置宽度
-	CKEDITOR.config.width = 'auto';
-	// 皮肤
-	CKEDITOR.config.skin = 'BootstrapCK-Skin';
-	// 获取对象
-	var editorElement = CKEDITOR.document.getById( 'editor' );
-	// 实例化对象
-	CKEDITOR.replace( 'editor' );
+	// ckeditor编辑器
+//	// 设置高度
+//	CKEDITOR.config.height = 150;
+//	// 设置宽度
+//	CKEDITOR.config.width = 'auto';
+//	// 皮肤
+//	CKEDITOR.config.skin = 'BootstrapCK-Skin';
+//	// 获取对象
+//	var editorElement = CKEDITOR.document.getById( 'editor' );
+//	// 实例化对象
+//	CKEDITOR.replace( 'editor' );
 	// 获取html
 //	var content = CKEDITOR.instances.editor.getData();   //CKEDITOR.instances.控件ID.getData();
+	
+	// ueditor百度富文本编辑器
+	var ue = UE.getEditor('editor');
 	
 	$("#addUser").submit(function(){
 		if($("#username").val()==''){
